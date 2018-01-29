@@ -1,5 +1,5 @@
 {
-    "name": "migratum/migratum",
+    "name": "mvrhov/migratum",
     "type": "library",
     "description": "Templated database migrations",
     "keywords": ["database migrations", "twig", "migrations", "database", "db", "migratum", "templated migrations", "sql migrations", "SQL"],
