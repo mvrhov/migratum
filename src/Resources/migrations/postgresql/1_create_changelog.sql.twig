@@ -1,0 +1,13 @@
+{% block up %}
+-- this table stores the migrations that have been applied to this database or schema
+CREATE TABLE {{ table }} (
+    version bigint NOT NULL,
+    applied_at timestamp NOT NULL,
+    checksum char(43), --base64 encoded sha256 of file
+    description text,
+    namespace text,
+    metadata jsonb,
+
+    PRIMARY KEY(version)
+);
+{% endblock up %}
