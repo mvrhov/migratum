@@ -159,7 +159,7 @@ class Container
 
         $commandMap[Create::getDefaultName()] = Create::class;
         $this->container->add(Create::class)
-            ->addArgument('config')
+            ->addArgument(new RawArgument($this->environment))
         ;
 
         $commandMap[Migrate::getDefaultName()] = Migrate::class;
