@@ -25,7 +25,7 @@
 
 namespace Migratum\Command;
 
-use Migratum\Config\Config;
+use Migratum\Config\Environment;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,12 +38,12 @@ class Create extends Command
 
     protected static $defaultName = 'migratum:create';
 
-    /** @var Config */
-    private $config;
+    /** @var Environment */
+    private $environment;
 
-    public function __construct(Config $config)
+    public function __construct(Environment $environment)
     {
-        $this->config = $config;
+        $this->environment = $environment;
 
         parent::__construct();
     }
@@ -86,7 +86,7 @@ class Create extends Command
         $fn = (new \DateTime('now', new \DateTimeZone('UTC')))->format('YmdHis') . '_' . $name . '.sql.twig';
 
         $paths = [];
-        foreach ($this->config->getPaths() as $path => $namespace) {
+        foreach ($this->environment->getPaths() as $path => $namespace) {
             $paths[$namespace][] = $path;
         }
 
@@ -139,8 +139,8 @@ class Create extends Command
         }
 
         $path = $paths[$namespace][max($index, 0)];
-        if ($this->config->hasMultiDriverMigrations()) {
-            $class = $this->config->getDatabaseDriverClass();
+        if ($this->environment->hasMultiDriverMigrations()) {
+            $class = $this->environment->getDatabaseDriverClass();
             $path .= $class::getDatabasePlatform() . '/';
         }
         if (!is_dir($path) && !mkdir($path, 0777, true) && !is_dir($path)) {
