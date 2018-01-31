@@ -29,9 +29,10 @@
  * @return boolean
  */
 return function () {
+    $dir = __DIR__; //on purpose so this also works under XDebug
     $files = [
-        __DIR__ . '/vendor/autoload.php', // stand-alone
-        dirname(__DIR__) . '/autoload.php',  // when used as a dependency
+        $dir . '/vendor/autoload.php', // stand-alone
+        dirname($dir ,2) . '/autoload.php',  // when used as a dependency
     ];
     foreach ($files as $file) {
         if (is_file($file)) {
