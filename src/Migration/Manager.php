@@ -294,7 +294,7 @@ class Manager
 
         $migrations = $this->findAvailableMigrations();
 
-        $this->runMigrations($migrations, $dryRun, true, ['table' => $this->changelogTableName]);
+        $this->runMigrations($migrations, $dryRun, true, ['v1' => ['table' => $this->changelogTableName]]);
 
         //restore old settings
         $this->paths = $oldPaths;
